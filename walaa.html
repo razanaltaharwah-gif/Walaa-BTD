@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أم اللول ❤️</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap');
+* { box-sizing: border-box; }
+:root {
+  --red: #ed2949;
+  --dark: #16070d;
+  --pink: #ff9aaa;
+  --cream: #fff0e8;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #581326 0%, #230912 45%, #10070b 100%);
+  color: var(--cream);
+  font-family: 'Cairo', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 10px;
+  border: 1px solid #ff75852c;
+  pointer-events: none;
+  z-index: 10;
+}
+#decor, #confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+#decor { z-index: 0; }
+#confetti { z-index: 9; }
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  width: 45px;
+  height: 57px;
+  border-radius: 50% 50% 46% 46%;
+  animation: rise linear infinite;
+  opacity: .8;
+  box-shadow: inset -8px -6px 0 #00000016;
+}
+.balloon::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 18px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid currentColor;
+}
+.balloon::after {
+  content: "";
+  position: absolute;
+  top: 56px;
+  left: 22px;
+  height: 65px;
+  border-left: 1px solid #ffffff50;
+}
+main {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 650px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 45px 23px 55px;
+  text-align: center;
+}
+.tag {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--pink);
+  direction: ltr;
+  margin-bottom: 12px;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(42px, 9vw, 65px);
+  line-height: 1.5;
+  font-weight: 900;
+}
+h1 span { color: var(--red); }
+.age {
+  margin: 2px 0 0;
+  color: #ff5c76;
+  font-size: clamp(70px, 20vw, 125px);
+  font-weight: 900;
+  line-height: 1.2;
+  text-shadow: 0 0 40px #f52d4a45;
+  animation: pulse 2s infinite;
+}
+.age-caption {
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: #f8a3b0;
+  direction: ltr;
+}
+.party {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 25px;
+  margin: 16px 0;
+}
+.party span {
+  animation: swing 1.7s ease-in-out infinite;
+}
+.party span:nth-child(2) { animation-delay: .3s; }
+.party span:nth-child(3) { animation-delay: .6s; }
+.cake-wrap {
+  position: relative;
+  width: 270px;
+  height: 235px;
+  max-width: 90vw;
+  margin: 12px auto 5px;
+  animation: cakeIn 1.2s ease both;
+}
+.cake {
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+  width: 220px;
+  height: 115px;
+  border-radius: 12px 12px 22px 22px;
+  background: linear-gradient(90deg, #9e1730, #ed4660 45%, #a91d36);
+  box-shadow: 0 13px 0 #671023, 0 22px 30px #00000040;
+}
+.cake::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -2px;
+  width: 224px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffd7d6;
+  box-shadow: inset 0 -7px 0 #f2a0aa;
+}
+.cake::after {
+  content: "♥  ♥  ♥  ♥  ♥";
+  position: absolute;
+  top: 39px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 5px;
+  color: #ffc2c9;
+}
+.plate {
+  position: absolute;
+  bottom: 9px;
+  left: 5px;
+  width: 260px;
+  height: 25px;
+  border-radius: 50%;
+  background: linear-gradient(#fff2ee, #d9a5aa);
+  box-shadow: 0 6px 0 #8d3446;
+}
+.candles {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 15px;
+  height: 95px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-end;
+  gap: 5px;
+  padding: 0 13px;
+  z-index: 3;
+}
+.candle {
+  position: relative;
+  width: 6px;
+  height: 39px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(-45deg, #fff2e9 0 4px, #ff6e84 4px 8px);
+}
+.flame {
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  left: -2px;
+  top: -17px;
+  border-radius: 60% 40% 55% 45%;
+  background: #ffda78;
+  box-shadow: 0 0 14px #ffb443;
+  transform-origin: bottom;
+  animation: flicker .4s infinite alternate;
+}
+.candle.out .flame { display: none; }
+.smoke {
+  display: none;
+  position: absolute;
+  top: -25px;
+  left: -3px;
+  color: #c5a8b2;
+  font-size: 16px;
+}
+.candle.out .smoke {
+  display: block;
+  animation: smoke 1s forwards;
+}
+button {
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  border: 1px solid #ff8295;
+  border-radius: 50px;
+  padding: 14px 25px;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(110deg, #a91432, #ed2949);
+  box-shadow: 0 7px 25px #ed294938;
+  transition: transform .22s, background .2s;
+}
+button:active { transform: scale(.95); }
+#game {
+  margin: 14px auto 0;
+  max-width: 400px;
+  min-height: 94px;
+}
+#gameText {
+  min-height: 30px;
+  color: #ffc1ca;
+  font-size: 14px;
+  margin: 10px 0;
+}
+#runBtn {
+  position: relative;
+  z-index: 5;
+}
+#message {
+  display: none;
+  margin: 32px auto 0;
+  padding: 24px 19px;
+  background: #ffffff08;
+  border: 1px solid #ff64772d;
+  border-radius: 20px;
+  animation: reveal .9s ease both;
+}
+#message.show { display: block; }
+#message h2 {
+  color: #ff8192;
+  font-size: 27px;
+  margin: 0 0 18px;
+}
+#message p {
+  font-size: 17px;
+  line-height: 2.3;
+  margin: 0;
+}
+#restart {
+  margin-top: 20px;
+  background: transparent;
+  box-shadow: none;
+  font-size: 13px;
+}
+footer {
+  margin-top: 35px;
+  color: #ad7d88;
+  font-size: 11px;
+  letter-spacing: 2px;
+  direction: ltr;
+}
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 9px;
+  height: 14px;
+  animation: confettiFall linear forwards;
+}
+@keyframes rise {
+  to { transform: translateY(-130vh) rotate(30deg); }
+}
+@keyframes pulse {
+  50% { transform: scale(1.04); }
+}
+@keyframes swing {
+  50% { transform: rotate(12deg) translateY(-5px); }
+}
+@keyframes flicker {
+  from { transform: rotate(-8deg) scale(.9); }
+  to { transform: rotate(8deg) scale(1.1); }
+}
+@keyframes cakeIn {
+  from { opacity: 0; transform: translateY(25px) scale(.85); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(20px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes smoke {
+  to { transform: translateY(-15px); opacity: 0; }
+}
+@keyframes confettiFall {
+  to { transform: translateY(110vh) rotate(800deg); opacity: .2; }
+}
+@media(max-width: 380px) {
+  main { padding-inline: 17px; }
+  #message p { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+<div id="decor"></div>
+<div id="confetti"></div>
+<main>
+  <div class="tag">A VERY IMPORTANT CELEBRATION</div>
+  <h1><span>أم اللول</span></h1>
+  <div class="age">21</div>
+  <div class="age-caption">LEVEL 21 UNLOCKED</div>
+  <div class="party">
+    <span>🎈</span><span>🎀</span><span>🎈</span>
+  </div>
+  <div class="cake-wrap">
+    <div class="plate"></div>
+    <div class="cake"></div>
+    <div class="candles" id="candles"></div>
+  </div>
+  <div class="subtitle" id="cakeHint">
+    قبل كل إشي... لازم نطفي الشموع!
+  </div>
+  <button id="blowBtn" onclick="blowCandles()">
+    اطفي شموعك يا مديرة 🎂
+  </button>
+  <div id="game">
+    <div id="gameText">بس خلصنا من الشموع، في مفاجأة إلك 👀</div>
+    <button id="runBtn" onclick="trySurprise()">
+      افتحي المفاجأة 🎁
+    </button>
+  </div>
+  <section id="message">
+    <div style="font-size:48px;margin-bottom:8px">🥂❤️</div>
+    <h2>أم اللول</h2>
+    <p>
+      ام اللول بنحبك جدًا،<br>
+      ان شالله كل ايامك الجاي بتكون حلوة شبهك،<br>
+      وبتصيري مديرة شركة كبيرة وبتسفرينا على سويسرا،<br>
+      كوني عارفة دايمًا انو احنا معك دايمًا
+    </p>
+    <button id="restart" onclick="celebrateAgain()">
+      عيديلنا الحفلة 🥳
+    </button>
+  </section>
+  <footer>MADE WITH LOVE</footer>
+</main>
+<script>
+const decor = document.getElementById('decor');
+const balloonColors = ['#ed2949', '#9e1834', '#ff8da0', '#f5d3cf'];
+for (let i = 0; i < 14; i++) {
+  const b = document.createElement('div');
+  b.className = 'balloon';
+  b.style.left = (Math.random() * 100) + '%';
+  b.style.background = balloonColors[i % balloonColors.length];
+  b.style.color = balloonColors[i % balloonColors.length];
+  b.style.animationDuration = (9 + Math.random() * 12) + 's';
+  b.style.animationDelay = (-Math.random() * 18) + 's';
+  decor.appendChild(b);
+}
+// 21 شمعة
+const candleBox = document.getElementById('candles');
+for (let i = 0; i < 21; i++) {
+  const candle = document.createElement('div');
+  candle.className = 'candle';
+  candle.innerHTML = '<span class="flame"></span><span class="smoke">〰</span>';
+  candleBox.appendChild(candle);
+}
+let candlesOut = false;
+let attempts = 0;
+let unlocked = false;
+function confetti(amount = 100) {
+  const area = document.getElementById('confetti');
+  const colors = ['#ff294f', '#ff9eae', '#f8d8a5', '#ffffff', '#a91c36'];
+  for (let i = 0; i < amount; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = (2 + Math.random() * 3) + 's';
+    p.style.animationDelay = Math.random() * 1.2 + 's';
+    p.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
+    area.appendChild(p);
+    setTimeout(() => p.remove(), 6500);
+  }
+}
+function blowCandles() {
+  if (candlesOut) return;
+  candlesOut = true;
+  document.querySelectorAll('.candle').forEach((c, i) => {
+    setTimeout(() => c.classList.add('out'), i * 45);
+  });
+  document.getElementById('cakeHint').textContent =
+    'عقبال ما تطفي شموع نجاحاتك كلها يا رب ❤️';
+  document.getElementById('blowBtn').textContent =
+    'انفخوا لها تصفيق 😂👏';
+  document.getElementById('blowBtn').disabled = true;
+  document.getElementById('blowBtn').style.opacity = '.65';
+  document.getElementById('gameText').textContent =
+    'خلص... هسا افتحي المفاجأة إذا بتقدري 😏';
+  confetti(60);
+}
+function trySurprise() {
+  const btn = document.getElementById('runBtn');
+  const text = document.getElementById('gameText');
+  if (!candlesOut) {
+    text.textContent = 'استني يا بنت الحلال! طفي الشموع أول 😂';
+    btn.textContent = 'أول الشموع يا مديرة 🎂';
+    btn.animate([
+      {transform:'rotate(0)'},
+      {transform:'rotate(-8deg)'},
+      {transform:'rotate(8deg)'},
+      {transform:'rotate(0)'}
+    ], {duration:350});
+    return;
+  }
+  if (unlocked) return;
+  attempts++;
+  if (attempts < 4) {
+    const messages = [
+      'لا لا مش هيك 😂 جرّبي كمان!',
+      'المفاجأة مش لأي حدا يا مديرة 😭',
+      'آخر محاولة... والله قربتي 😂'
+    ];
+    text.textContent = messages[attempts - 1];
+    btn.animate([
+      {transform:'translateX(0) rotate(0)'},
+      {transform:'translateX(-35px) rotate(-10deg)'},
+      {transform:'translateX(30px) rotate(10deg)'},
+      {transform:'translateX(-15px) rotate(-5deg)'},
+      {transform:'translateX(0) rotate(0)'}
+    ], {duration:450, easing:'ease-in-out'});
+    btn.textContent = [
+      'اكبسي صح 😂',
+      'مش هون يا ولاء 😭',
+      'طيب آخر مرة 😈'
+    ][attempts - 1];
+    return;
+  }
+  unlocked = true;
+  btn.textContent = 'افتحيها هسا ❤️';
+  btn.style.background = 'linear-gradient(90deg,#e92749,#ff7389)';
+  btn.style.transform = 'scale(1.08)';
+  text.textContent = 'طيب اقتنعنا إنك بتعرفي تكبسي 😂 اضغطي هسا!';
+  btn.onclick = revealMessage;
+}
+function revealMessage() {
+  document.getElementById('message').classList.add('show');
+  document.getElementById('game').style.display = 'none';
+  document.getElementById('blowBtn').style.display = 'none';
+  confetti(180);
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+}
+function celebrateAgain() {
+  candlesOut = false;
+  attempts = 0;
+  unlocked = false;
+  document.querySelectorAll('.candle').forEach(c => {
+    c.classList.remove('out');
+  });
+  document.getElementById('message').classList.remove('show');
+  document.getElementById('game').style.display = 'block';
+  const blowBtn = document.getElementById('blowBtn');
+  blowBtn.style.display = 'inline-block';
+  blowBtn.disabled = false;
+  blowBtn.style.opacity = '1';
+  blowBtn.textContent = 'اطفي شموعك يا مديرة 🎂';
+  document.getElementById('cakeHint').textContent =
+    'قبل كل إشي... لازم نطفي الشموع!';
+  document.getElementById('gameText').textContent =
+    'بس خلصنا من الشموع، في مفاجأة إلك 👀';
+  const runBtn = document.getElementById('runBtn');
+  runBtn.textContent = 'افتحي المفاجأة 🎁';
+  runBtn.style.background = '';
+  runBtn.style.transform = '';
+  runBtn.onclick = trySurprise;
+  confetti(100);
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+</script>
+</body>
+</html>
